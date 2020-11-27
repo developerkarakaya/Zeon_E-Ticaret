@@ -1,0 +1,53 @@
+﻿
+@{
+    ViewBag.Title = "Marka Ekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Marka Ekleme Sayfası
+            </header>
+            <div class="panel-body">
+                <form class="form-horizontal tasi-form" method="post" action="/Admin/MarkaEkle" enctype="multipart/form-data">
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Marka Adı</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Adi">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label class="col-sm-2 col-sm-2 control-label">Marka Açıklaması</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" name="Aciklama">
+                        </div>
+                    </div>
+
+
+
+                    <div class="form-group">
+                        <label class="control-label col-md-3">Marka Resmi</label>
+                        <div class="controls col-md-9">
+                            <div class="fileupload fileupload-new" data-provides="fileupload">
+                                <span class="btn btn-white btn-file">
+                                    <span class="fileupload-new"><i class="icon-paper-clip"></i>Resim Seç</span>
+                                    <input type="file" class="default" name="fileupload" />
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+
+                        <button class="btn btn-success" type="submit">Marka Ekle</button>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

@@ -1,0 +1,58 @@
+﻿
+@{
+    ViewBag.Title = "Ürün Ekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Ürün Ekleme Sayfası
+            </header>
+            <div class="panel-body">
+                <form role="form" action="/Admin/UrunEkle" method="post" class="form-horizontal tasi-form">
+                    <div class="form-group has-success">
+                        <label class="col-lg-2 control-label" style="font-size:20px">Ürün Adı</label>
+                        <input type="text" placeholder="" id="f-name" name="Adi" class="form-control">
+                    </div>
+                    <div class="form-group has-error">
+                        <label class="col-lg-2 control-label" style="font-size:20px">Ürün Açıklaması</label>
+                        <input type="text" placeholder="" id="l-name" name="Aciklama" class="form-control">
+                    </div>
+                    <div class="form-group has-warning">
+                        <label class="col-lg-2 control-label" style="font-size:20px">Alış Fiyatı</label>
+                        <input type="text" class="spinner-input form-control" name="AlisFiyat">
+                    </div>
+                    <div class="form-group has-warning">
+                        <label class="col-lg-2 control-label" style="font-size:20px">Satış Fiyatı</label>
+                        <input type="text" class="spinner-input form-control" name="SatisFiyat">
+                    </div>
+
+                    <label class="col-lg-2 control-label" style="font-size:20px">Kategori </label>
+                    <select class="form-control input-lg m-bot15" name="KategoriID">
+                        @foreach (var ktg in ViewBag.kategoriler)
+                        {
+                            <option value="@ktg.id">@ktg.Adi</option>
+                        }
+                    </select>
+
+                    <label class="col-lg-2 control-label" style="font-size:20px">Marka </label>
+                    <select class="form-control input-lg m-bot15" name="MarkaID">
+                        @foreach (var mrk in ViewBag.markalar)
+                        {
+                            <option value="@mrk.id">@mrk.Adi</option>
+                        }
+                    </select>
+                    <div class="form-group">
+
+                        <button class="btn btn-danger" type="submit">Kaydet</button>
+
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>
+

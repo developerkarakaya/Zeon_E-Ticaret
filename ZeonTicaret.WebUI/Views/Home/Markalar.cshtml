@@ -1,0 +1,26 @@
+﻿
+@model IEnumerable<ZeonTicaret.WebUI.Models.Marka>
+<div class="single-banner">
+    <div class="inner-text">
+        <h4>MARKALAR</h4>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div class="partner-logo">
+    <div class="container">
+        <div class="logo-carousel owl-carousel">
+            @foreach (var mrk in Model)
+            {
+                <div class="logo-item">
+                    <div class="tablecell-inner">
+                        <img style="border-radius:5px;" src="@ZeonTicaret.WebUI.App_Classes.Context.Baglanti.Resim.FirstOrDefault(x=>x.id==mrk.ResimID).OrtaYol" alt="">
+                        <br />
+                        <a href="/Home/Urunler?MarkaId=@mrk.id"> <span style="color:#b2b2b2; margin:5px; padding:5px;"><strong>@mrk.Adi</strong></span></a>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

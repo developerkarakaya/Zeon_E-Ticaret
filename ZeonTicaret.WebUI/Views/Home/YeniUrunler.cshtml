@@ -1,0 +1,96 @@
+﻿@model IEnumerable<ZeonTicaret.WebUI.Models.Urun>
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+<script>
+    $(document).ready(function myFunction() {
+        $(".sepet").click(function myFunction() {
+            var uid = $(this).attr("name");
+
+            $.ajax({
+                type: "GET",
+                url: "/Home/SepeteEkle",
+                data: { id: uid },
+                success: function myfunction() {
+
+                    $.ajax({
+                        type: "GET",
+                        url: "/Home/MiniSepetWidget",
+                        success: function VeriGetir(veri) {
+                            $(".cart-icon").html("");
+                            $(".cart-icon").html(veri);
+
+                        }
+                    });
+                },
+                error: function myfunction() {
+                    alert("Ürün Sepete Eklenemedi.");
+                }
+
+
+            });
+        });
+    });
+</script>
+
+<div class="single-banner">
+    <div class="inner-text">
+        <h4>ÜRÜNLER</h4>
+    </div>
+</div>
+<br />
+<br />
+<br />
+
+<!-- Women Banner Section Begin -->
+<section class="women-banner spad">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="product-large set-bg" data-setbg="/Content/fashi/img/products/women-large.jpg">
+                    <h2>Ürünler</h2>
+                    <a href="/Home/Urunler">Daha Fazla</a>
+                </div>
+            </div>
+            <div class="col-lg-8 offset-lg-1">
+                <div class="filter-control">
+                    <ul>
+                        <li class="active"></li>
+                        <li></li>
+                        <li></li>
+                        <li></li>
+                    </ul>
+                </div>
+                <div class="product-slider owl-carousel">
+                    @foreach (var urun in Model)
+                    {
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                @if (urun.Resim.Count > 0)
+                                {
+                                    <img src="@urun.Resim.FirstOrDefault(x => x.Varsayilan == true).OrtaYol" alt="Ürün Fotoğraf">
+                                }
+                                <div class="sale">Satış</div>
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a name="@urun.id" href="#" class="sepet"><i class="icon_bag_alt"></i>Sepete Ekle</a></li>
+                                    <li class="quick-view"><a href="/Home/UrunDetay?id=@urun.Adi&kId=@urun.KategoriID"><i class="glyphicon-eye-open"></i>Görüntüle</a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">@urun.Kategori.Adi</div>
+                                <a href="#">
+                                    <h5>@urun.Adi</h5>
+                                </a>
+                                <div class="product-price">
+                                    @urun.SatisFiyat ₺
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Women Banner Section End -->

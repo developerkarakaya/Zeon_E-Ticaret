@@ -1,0 +1,39 @@
+﻿
+@{
+    ViewBag.Title = "Giriş Yap";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+<!-- Register Section Begin -->
+<div class="register-login-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6 offset-lg-3">
+                <div class="login-form">
+                    <h2>GİRİŞ YAP</h2>
+                    <form action="#">
+                        <div class="group-input">
+                            <label for="username">Kullanıcı Adı Veya E-Mail *</label>
+                            <input type="text" id="username">
+                        </div>
+                        <div class="group-input">
+                            <label for="pass">Şifre *</label>
+                            <input type="text" id="pass">
+                        </div>
+                        <div class="group-input gi-check">
+                            <div class="gi-more">
+                             
+                                <a href="#" class="forget-pass">Şifreni Mi Unuttun?</a>
+                            </div>
+                        </div>
+                        <button type="submit" class="site-btn login-btn">Giriş Yap</button>
+                    </form>
+                    <div class="switch-login">
+                        <a href="/Kullanici/KayitOl" class="or-login">Hesap Oluştur</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Register Form Section End -->

@@ -1,0 +1,86 @@
+﻿
+@{
+    ViewBag.Title = "Ürün Özellik Ekle";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+
+@model IEnumerable<ZeonTicaret.WebUI.Models.Urun>
+
+
+@section head
+{
+    <script src="~/ContentF/js/jquery-1.8.3.min.js"></script>
+    <script>
+        $(document).ready(function myfunction() {//aşağıdaki html ler yüklendiğinde ready demek
+            $("#urun").change(function myfunction() {//urunde herhangi bi değişiklik olduğunda yani bi şey seçtiğinde
+                //var id = $(this).val();//bunun valini al deyince option ların value sini alır
+                //var kId = id.split("-")[1];//araya - koyarak tutuyoruz *- ile ayırıp 1. yi yani aslında 2.yi aldık
+                var kId = $(this).find("option:selected").attr("title");//optionlardan seçli olanın title ını getir
+                $.ajax({
+                    type: "GET",
+                    url: "/Admin/UrunOzellikTipWidget",
+                    data: { katId: kId },
+                    success: function myfunction(veri) {
+                        $("#tip").html("");//ilk önce tip olan divin içini boşalttıkki bidaha bidaha asmasın oraya
+                        $("#tip").append(veri);//gelen veri aslında UrunOzellikTipWidget'ın html sayfasında ne varsa bütünüyle geri dönderir hani fonksionda partialView döndür diyoruz ya'
+
+                    },
+                    error: function myfunction() {
+                        alert("hata");
+                    }
+                });
+            });
+
+      
+
+
+
+
+
+        });
+    </script>
+
+}
+
+<div class="row">
+    <div class="col-lg-12">
+        <section class="panel">
+            <header class="panel-heading">
+                Ürün Özellik Ekle
+            </header>
+            <div class="panel-body">
+                <form role="form" action="/Admin/UrunOzellikEkle" method="post" class="form-horizontal tasi-form">
+                    <div class="form-group">
+                        <label class="col-lg-2 control-label">Ürün:</label>
+                        <div class="col-lg-10">
+                            <select id="urun" class="form-control m-bot15" name="UrunId">
+                                @foreach (var urun in Model)
+                                {
+                                    <option value="@urun.id" title="@urun.KategoriID">@urun.Adi</option>
+                                }
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="tip">
+                    </div>
+                    <div id="deger">
+                    </div>
+
+
+                    @*@{
+                            Html.RenderAction("UrunOzellikTipWidget", "Admin");
+                            Html.RenderAction("UrunOzellikDegerWidget", "Admin");
+                        }*@
+                    <!--Bu fonksiyonların dönderdiği sayfa görünümleri buraya yerleşir buna partial wiew deniyor unutma fonksiyonu açıp çalıştırırsan anlarsın-->
+                    <div class="form-group">
+                        <div class="col-lg-offset-2 col-lg-10">
+                            <button class="btn btn-danger" type="submit">Kaydet</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </section>
+    </div>
+</div>

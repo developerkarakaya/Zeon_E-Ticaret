@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="7fadc2dd500a4d3e84fb202da08a65e6" Name="Diagram1" ZoomLevel="84">
+        <EntityTypeShape EntityType="Model.aspnet_Applications" Width="1.5" PointX="0.75" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_Paths" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_PersonalizationAllUsers" Width="1.5" PointX="5.25" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_PersonalizationPerUser" Width="1.5" PointX="5.25" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_Profile" Width="1.5" PointX="7.5" PointY="8.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_Roles" Width="1.5" PointX="3" PointY="9.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_SchemaVersions" Width="1.5" PointX="0.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_Users" Width="1.5" PointX="5.25" PointY="9.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.aspnet_WebEvent_Events" Width="1.5" PointX="7.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Etiket" Width="1.5" PointX="2.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kargo" Width="1.5" PointX="10.5" PointY="8.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Kategori" Width="1.5" PointX="14.875" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Marka" Width="1.5" PointX="21.25" PointY="0.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Musteri" Width="1.5" PointX="7.5" PointY="11.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.MusteriAdres" Width="1.5" PointX="9.75" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OzellikDeger" Width="1.5" PointX="9.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OzellikTip" Width="1.5" PointX="17.25" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.OzellikUrun" Width="1.5" PointX="0.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Resim" Width="1.5" PointX="17.875" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Satis" Width="1.5" PointX="12.75" PointY="11.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SatisDetay" Width="1.5" PointX="15" PointY="11.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.SiparisDurum" Width="1.5" PointX="10.5" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.sysdiagrams" Width="1.5" PointX="9.75" PointY="4.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.Urun" Width="1.5" PointX="21.5" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_Applications" Width="1.5" PointX="0.75" PointY="13.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_MembershipUsers" Width="1.5" PointX="2.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_Profiles" Width="1.5" PointX="4.75" PointY="1.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_Roles" Width="1.5" PointX="12.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_Users" Width="1.5" PointX="4.75" PointY="14.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_UsersInRoles" Width="1.5" PointX="14.75" PointY="7.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_WebPartState_Paths" Width="1.5" PointX="6.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_WebPartState_Shared" Width="1.5" PointX="12.75" PointY="15.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="Model.vw_aspnet_WebPartState_User" Width="1.5" PointX="14.75" PointY="15.5" IsExpanded="true" />
+        <AssociationConnector Association="Model.FK__aspnet_Pa__Appli__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__aspnet_Ro__Appli__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__aspnet_Us__Appli__412EB0B6" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__aspnet_Pe__PathI__08B54D69" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__aspnet_Pe__PathI__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__aspnet_Pe__UserI__0D7A0286" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK__aspnet_Pr__UserI__66603565" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Musteri_aspnet_Users" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Satis_Kargo" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Kategori_Resim" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_OzellikTip_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Urun_Kategori" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Urun_Marka" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_MusteriAdres_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Satis_Musteri" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_Satis_SiparisDurum" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.FK_SatisDetay_Satis" ManuallyRouted="false" />
+        <AssociationConnector Association="Model.aspnet_UsersInRoles" ManuallyRouted="false" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

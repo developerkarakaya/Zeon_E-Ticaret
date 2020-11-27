@@ -1,0 +1,6 @@
+﻿@model IEnumerable<ZeonTicaret.WebUI.Models.Kategori>
+
+@foreach (var item in Model)
+{
+    <li><a href="/Home/Urunler?KategoriId=@item.id">@item.Adi</a></li>
+}

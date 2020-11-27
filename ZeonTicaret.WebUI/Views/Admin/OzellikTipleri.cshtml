@@ -1,0 +1,56 @@
+﻿
+@{
+    ViewBag.Title = "Ozellik Tipleri";
+    Layout = "~/Views/Shared/AdminLayout.cshtml";
+}
+
+@model IEnumerable<ZeonTicaret.WebUI.Models.OzellikTip>
+
+<section class="panel">
+    <header class="panel-heading">
+        <span class="label label-info">Özellikler</span>
+    </header>
+    <div class="panel-body">
+        <div class="adv-table editable-table ">
+            <div class="clearfix">
+                <div class="btn-group" style="float:right">
+                    <button id="editable-sample_new" class="btn btn-success">
+                        <a href="/Admin/OzellikTipEkle" style="color:white">Yeni Özellik Tip </a> <i class="icon-plus"></i>
+                    </button>
+                </div>
+            </div>
+            <br />
+            <br />
+            <div class="space15"></div>
+            <table class="table table-striped table-hover table-bordered" id="editable-sample">
+                <thead>
+                    <tr>
+                        <th>Özellik Tip Adı</th>
+                        <th>Açıklaması</th>
+                        <th>Kategorisi</th>
+                        <th>Düzenle</th>
+                        <th>Sil</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var ozellik in Model)
+                    {
+
+                        <tr class="">
+                            <td>@ozellik.Adi</td>
+                            <td>@ozellik.Aciklama</td>
+                            @if(ozellik.Kategori.Adi!=null)
+                            {
+                                <td>@ozellik.Kategori.Adi</td>
+                            }
+                            <td><a class="btn btn-success" href="/Admin/OzellikTipGuncelle/@ozellik.id"><i class="icon-pencil"></i></a></td>
+                            <td><a class="btn btn-danger" href="/Admin/OzellikTipSil/@ozellik.id"><i class="icon-trash"></i></a></td>
+                        </tr>
+
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
+

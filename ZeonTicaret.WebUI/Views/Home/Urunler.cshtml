@@ -1,0 +1,190 @@
+﻿
+@{
+    ViewBag.Title = "Ürünler Sayfası";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+@using ZeonTicaret.WebUI.Models;
+
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+<script>
+    $(document).ready(function myFunction(){
+    $(".sepet").click(function myFunction(){
+        var uid = $(this).attr("name");
+        $.ajax({
+        type:"GET",
+        url:"/Home/SepeteEkle",
+        data:{id:uid},
+    success:function myfunction() {
+
+        $.ajax({
+            type:"GET",
+            url:"/Home/MiniSepetWidget",
+            success:function VeriGetir(veri){
+            $(".cart-icon").html("");
+            $(".cart-icon").html(veri);
+
+    }
+
+        });
+
+
+    },
+    error:function myfunction(){
+        alert("Ürün Sepete Eklenemedi.");
+    }
+
+
+    });
+
+    });
+    });
+
+
+</script>
+<style>
+
+    #ktg:hover {
+        width: 120px;
+        margin-left: 10px;
+        border-bottom: 1px solid #e7ab3c;
+    }
+
+    #mrk {
+        padding:5px;
+    }
+    #mrk:hover {
+        width: 120px;
+        margin-left: 10px;
+        border-bottom: 1px solid #e7ab3c;
+    }
+</style>
+
+<section class="product-shop spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3 col-md-6 col-sm-8 order-2 order-lg-1 produts-sidebar-filter">
+                <div class="filter-widget">
+                    <h4 class="fw-title">Kategoriler</h4>
+                    <ul class="filter-catagories">
+                        @foreach (Kategori ktg in ViewBag.Kategoriler)
+                        {
+                            <li id="ktg">
+                                <a style="font-size:15px;" href="/Home/Urunler?KategoriId=@ktg.id">
+                                    @ktg.Adi (<span style="color:#e7ab3c" >@ktg.Urun.Count</span>)
+                            </a>
+                        </li>
+                    }
+                    </ul>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Markalar</h4>
+                    <div class="fw-brand-check">
+                        @foreach (Marka marka in ViewBag.Markalar)
+                        {
+                            <div id="mrk" class="bc-item">
+                                    <a style="padding:10px;
+        color: #636363;
+        font-size: 15px;
+        " href="/Home/Urunler?MarkaId=@marka.id">@marka.Adi (<span style="color:#e7ab3c">@marka.Urun.Count</span>)</a>
+                    </div>
+                }
+                    </div>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Etiketler</h4>
+                    <div class="fw-tags">
+                        <a href="#">Alışveriş</a>
+                        <a href="#">Laptoplar</a> 
+                        <a href="#">Telefonlar</a>
+                        <a href="#">Tabletler</a>
+                        <a href="#">Lenovo</a>
+                        <a href="#">LG</a>
+                        <a href="#">HP</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-9 order-1 order-lg-2">
+                <div class="product-show-option">
+                    <div class="row">
+                        <div class="col-lg-7 col-md-7">
+                            @if (TempData["MarkaAdi"] != null)
+                            {
+                                <p value=""> " <span style="color:#e7ab3c"><strong>@TempData["MarkaAdi"]</strong></span>  " Markasına Ait @ViewBag.Urunler.Count Adet Ürün Listeleniyor...</p>
+
+                            }
+                            else if (TempData["KategoriAdi"] != null)
+                            {
+                                <p value=""> " <span style="color:#e7ab3c"><strong>@TempData["KategoriAdi"]</strong></span>  " Kategorisine Ait @ViewBag.Urunler.Count Adet Ürün Listeleniyor...</p>
+
+                            }
+                            else
+                            {
+                                <p value=""> " <span style="color:#e7ab3c"><strong>Tüm Kategoriler</strong></span>  " e Ait @ViewBag.Urunler.Count Adet Ürün Listeleniyor...</p>
+
+                            }
+
+                        </div>
+                        <div class="product-show-option">
+                            <div class="row">
+                                <div class="col-lg-7 col-md-7">
+                                    <div class="select-option">
+                                        <select >
+                                            <option value="">Filtrele         . </option>
+                                            <option value="">Fiyata Göre Artan</option>
+                                            <option value="">Fiyata Göre Azalan</option>
+                                            <option value="">Tarihe Göre En Yeni</option>
+                                            <option value="">Tarihe Göre En Eski</option>
+
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>   
+                    </div>                              
+                                                            
+                </div>
+                <div class="product-list">
+               
+                    <div class="row">
+                        @foreach (Urun urun in ViewBag.Urunler)
+                        {
+                            <div class="col-lg-4 col-sm-6" style="float:left">
+                                <div class="product-item">
+                                    <div class="pi-pic">
+                                        @if (urun.Resim.Count > 0)
+                                        {
+                                            <img src="@urun.Resim.FirstOrDefault(x => x.Varsayilan == true).OrtaYol" alt="">
+                                        }
+                                        <div class="icon">
+                                            <i class="icon_heart_alt"></i>
+                                        </div>
+                                        <ul>
+                                            <li class="w-icon active"><a name="@urun.id" href="#" class="sepet"><i class="icon_bag_alt"></i>Sepete Ekle</a></li>
+                                            <li class="quick-view"><a href="/Home/UrunDetay?id=@urun.Adi&kId=@urun.KategoriID">+ Görüntüle</a></li>
+                                        </ul>
+                                    </div>
+                                    <div class="pi-text">
+                                        <div class="catagory-name">@urun.Kategori.Adi</div>
+                                        <a href="#">
+                                            <h5>@urun.Adi</h5>
+                                        </a>
+                                        <div class="product-price">
+                                            @urun.SatisFiyat ₺
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="loading-more">
+                    <i class="icon_loading"></i>
+                    <a href="#">
+                        Devamını Gör
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>                              
+

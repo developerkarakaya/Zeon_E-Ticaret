@@ -1,0 +1,126 @@
+﻿
+@model ZeonTicaret.WebUI.App_Classes.Sepet
+
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+
+<script>
+
+    $(document).ready(function myfunction(){
+        $(".urunSil").click(function myfunction(){
+    var uId=$(this).attr("name");
+    $.ajax({
+                type:"GET",
+                url:"/Home/SepetUrunAdetDusur",
+                data:{id:uId},
+                success:function muFunction(){
+          $.ajax({
+                type:"GET",
+                url:"/Home/MiniSepetWidget",
+                success:function myfunction(veri){
+                 $(".cart-icon").html("");
+            $(".cart-icon").html(veri);
+    }
+    
+    });
+    },
+    error:function mFuntion(){
+    alert("Hata");
+    }
+
+    
+    
+    });
+    
+    });
+    });
+
+
+
+</script>
+
+<li class="cart-icon">
+    <a href="#">
+        <i class="icon_bag_alt"></i>
+        <span>
+            @if (Model != null)
+            {
+            <span>@Model.Urunler.Sum(x => x.Adet)</span>
+
+            }
+            else
+            {
+                <span>0</span>
+            }
+
+        </span>
+    </a>
+    <div class="cart-hover">
+        <div class="select-items">
+            <table>
+                <tbody>
+                    <h5>
+                        Sepetim ( @if (Model != null)
+                        {
+                            <span>@Model.Urunler.Sum(x => x.Adet)</span>
+
+                        }
+                        else
+                        {
+                            <span>0</span>
+                        })
+                    </h5>
+                   
+                    <br />
+                    @if (Model != null)
+                    {
+
+                        foreach (var item in Model.Urunler)
+                        {
+                            <tr>
+                                <td class="si-pic">
+                                    @if (item.Urun.Resim != null)
+                                    {
+                                        <img src="@item.Urun.Resim.FirstOrDefault(x=>x.Varsayilan==true).OrtaYol" width="100" height="100" alt="">
+                                    }
+                                </td>
+                                <td class="si-text">
+                                    <div class="product-selected">
+                                        <p>@item.Urun.SatisFiyat ₺</p>
+                                        <p>Adet : @item.Adet</p>
+                                        <h6><a href="/Home/UrunDetay/@item.Urun.Adi">@item.Urun.Adi</a></h6>
+                                    </div>
+                                </td>
+
+                                <td class="si-close">
+                                   <button class="btn btn-warning urunSil" name="@item.Urun.id"  >x</button>
+                                </td>
+                            </tr>
+
+
+
+                        }
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="select-total">
+            <span>Toplam Tutar: 400 TL</span>
+            
+            <br />
+            <h5>
+                @if (Model != null)
+                {
+                    <span>Sepette  @Model.Urunler.Sum(x=>x.Adet) Adet Ürün Bulunmaktadır.</span>
+                }
+                else
+                {
+                    <span>Sepette 0 Adet Ürün Bulunmaktadır.</span>
+                }
+            </h5>
+        </div>
+        <div class="select-button">
+            <a href="#" class="primary-btn view-card">Satın Al</a>
+            <a href="#" class="primary-btn checkout-btn">Çıkış Yap</a>
+        </div>
+    </div>
+</li>

@@ -1,0 +1,427 @@
+﻿
+@{
+    ViewBag.Title = Request.QueryString["id"] +" Ürün Detayı";
+    Layout = "~/Views/Shared/SiteLayout.cshtml";
+}
+
+@using ZeonTicaret.WebUI.Models;
+
+@model ZeonTicaret.WebUI.Models.Urun
+
+
+<script src="~/Content/Zeon/js/jquery-1.10.0.min.js"></script>
+
+<script>
+
+    $(document).ready(function myFunction(){
+    $(".sepet").click(function myFunction(){
+        var uid = $(this).attr("name");
+
+        $.ajax({
+        type:"GET",
+        url:"/Home/SepeteEkle",
+        data:{id:uid},
+    success:function myfunction() {
+
+        $.ajax({
+            type:"GET",
+            url:"/Home/MiniSepetWidget",
+            success:function VeriGetir(veri){
+            $(".cart-icon").html("");
+            $(".cart-icon").html(veri);
+
+    }
+
+        });
+
+
+    },
+    error:function myfunction(){
+        alert("Ürün Sepete Eklenemedi.");
+    }
+
+
+    });
+
+
+
+
+
+    });
+    });
+
+
+</script>
+
+<style>
+    #ktg:hover {
+        width: 120px;
+        margin-left: 10px;
+        border-bottom: 1px solid #e7ab3c;
+    }
+
+    #mrk {
+        padding: 5px;
+    }
+
+        #mrk:hover {
+            width: 120px;
+            margin-left: 10px;
+            border-bottom: 1px solid #e7ab3c;
+        }
+</style>
+
+<!-- Product Shop Section Begin -->
+<section class="product-shop spad page-details">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-3">
+                <div class="filter-widget">
+                    <h4 class="fw-title">Kategoriler</h4>
+                    <ul class="filter-catagories">
+                        @foreach (Kategori ktg in ViewBag.Kategoriler)
+                        {
+                            <li id="ktg">
+                                <a style="font-size:15px;" href="/Home/Urunler?KategoriId=@ktg.id">
+                                    @ktg.Adi (<span style="color:#e7ab3c">@ktg.Urun.Count</span>)
+                                </a>
+                            </li>
+                        }
+                    </ul>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Markalar</h4>
+                    <div class="fw-brand-check">
+                        @foreach (Marka marka in ViewBag.Markalar)
+                        {
+                            <div id="mrk" class="bc-item">
+                                <a style="padding:10px;
+        color: #636363;
+        font-size: 15px;
+        " href="/Home/Urunler?MarkaId=@marka.id">@marka.Adi (<span style="color:#e7ab3c">@marka.Urun.Count</span>)</a>
+            </div> 
+                        }
+                    </div>
+                </div>
+                <div class="filter-widget">
+                    <h4 class="fw-title">Etiketler</h4>
+                    <div class="fw-tags">
+                        <a href="#">Alışveriş</a>
+                        <a href="#">Laptoplar</a>
+                        <a href="#">Telefonlar</a>
+                        <a href="#">Tabletler</a>
+                        <a href="#">Lenovo</a>
+                        <a href="#">LG</a>
+                        <a href="#">HP</a>
+                    </div>
+                </div>
+            </div>
+            <!--ürün-->
+
+            <div class="col-lg-9">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="product-pic-zoom">
+
+                            <img class="product-big-img" src="@Model.Resim.FirstOrDefault(x=>x.Urun.Adi==Model.Adi).BuyukYol" alt="@Model.Adi">
+
+                            <div class="zoom-icon">
+                                <i class="fa fa-search-plus"></i>
+                            </div>
+                        </div>
+                        <div class="product-thumbs">
+                            <div class="product-thumbs-track ps-slider owl-carousel">
+                                @foreach (var item in Model.Resim)
+                                {
+                                    <div class="pt active" data-imgbigurl="@item.OrtaYol">
+                                        <img src="@item.OrtaYol" alt="@Model.Adi">
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="product-details">
+                            <div class="pd-title">
+
+
+                                <h3>@Model.Adi</h3>
+
+                                <a href="#" class="heart-icon"><i class="icon_heart_alt"></i></a>
+
+                                
+                            </div>
+                            <div class="pd-rating">
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star"></i>
+                                <i class="fa fa-star-o"></i>
+                                <span>(5)</span>
+                                <br />
+
+                                <span><i class="fa fa-folder-open"></i>  @Model.Kategori.Adi</span> <br />
+                                <span><i class="fa fa-star"></i>  @Model.Marka.Adi</span>
+                            </div>
+
+
+                            <div class="pd-desc">
+                                <p>
+                                    @Model.Aciklama
+                                </p>
+                                <h4>@Model.SatisFiyat ₺</h4>
+                            </div>
+                            <div class="quantity">
+                                <div class="pro-qty">
+                                    <input type="text" value="1">
+                                </div>
+                                <a href="#" class="primary-btn pd-cart">Satın Al</a>
+                            </div>
+
+                            <div class="pd-share">
+                                <div class="pd-social">
+                                    <a href="#"><i class="ti-facebook"></i></a>
+                                    <a href="#"><i class="ti-twitter-alt"></i></a>
+                                    <a href="#"><i class="ti-linkedin"></i></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="product-tab">
+                    <div class="tab-item">
+                        <ul class="nav" role="tablist">
+                            <li>
+                                <a class="active" data-toggle="tab" href="#tab-1" role="tab">Açıklama</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#tab-2" role="tab">Ürün Özellikleri</a>
+                            </li>
+                            <li>
+                                <a data-toggle="tab" href="#tab-3" role="tab">Yorumlar</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="tab-item-content">
+                        <div class="tab-content">
+                            <div class="tab-pane fade-in active" id="tab-1" role="tabpanel">
+                                <div class="product-content">
+                                    <div class="row">
+                                        <div class="col-lg-7">
+                                            <h5>Introduction</h5>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                            </p>
+                                            <h5>Features</h5>
+                                            <p>
+                                                Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do
+                                                eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+                                                ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+                                                aliquip ex ea commodo consequat. Duis aute irure dolor in
+                                            </p>
+                                        </div>
+                                        <div class="col-lg-5">
+                                            <img src="img/product-single/tab-desc.jpg" alt="">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-2" role="tabpanel">
+                                <div class="specification-table">
+                                    <table>
+                                        <tr>
+                                            <td class="p-catagory">Değerlendirme</td>
+                                            <td>
+                                                <div class="pd-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <span>(5)</span>
+                                                </div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory"> Ad </td>
+                                            <td>
+                                                <div class="p-code">@Model.Adi</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory"> Açıklama </td>
+                                            <td>
+                                                <div class="p-code">@Model.Aciklama</div>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="p-catagory"> Fiyat</td>
+                                            <td>
+                                                <div class="p-code">@Model.SatisFiyat</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="p-catagory"> Marka </td>
+                                            <td>
+                                                <div class="p-code">@Model.Marka.Adi</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="p-catagory"> Kategori</td>
+                                            <td>
+                                                <div class="p-code">@Model.Kategori.Adi</div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td class="p-catagory"> Özellik </td>
+                                            <td>
+                                                <div class="p-code">@Model.Kategori.Adi</div>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="tab-3" role="tabpanel">
+                                <div class="customer-review-option">
+                                    <h4>2 Comments</h4>
+                                    <div class="comment-option">
+                                        <div class="co-item">
+                                            <div class="avatar-pic">
+                                                <img src="img/product-single/avatar-1.png" alt="">
+                                            </div>
+                                            <div class="avatar-text">
+                                                <div class="at-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <h5>Brandon Kelley <span>27 Aug 2019</span></h5>
+                                                <div class="at-reply">Nice !</div>
+                                            </div>
+                                        </div>
+                                        <div class="co-item">
+                                            <div class="avatar-pic">
+                                                <img src="img/product-single/avatar-2.png" alt="">
+                                            </div>
+                                            <div class="avatar-text">
+                                                <div class="at-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                </div>
+                                                <h5>Roy Banks <span>27 Aug 2019</span></h5>
+                                                <div class="at-reply">Nice !</div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="personal-rating">
+                                        <h6>Your Ratind</h6>
+                                        <div class="rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                        </div>
+                                    </div>
+                                    <div class="leave-comment">
+                                        <h4>Leave A Comment</h4>
+                                        <form action="#" class="comment-form">
+                                            <div class="row">
+                                                <div class="col-lg-6">
+                                                    <input type="text" placeholder="Name">
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <input type="text" placeholder="Email">
+                                                </div>
+                                                <div class="col-lg-12">
+                                                    <textarea placeholder="Messages"></textarea>
+                                                    <button type="submit" class="site-btn">Send message</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Product Shop Section End -->
+<!-- Related Products Section End -->
+<div class="related-products spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="section-title">
+                    <h2>Benzer Ürünler</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+
+            @foreach (Urun item in ViewBag.Urunler)
+            {
+
+              
+                    <div class="col-lg-3 col-sm-6">
+
+
+
+                        <div class="product-item">
+                            <div class="pi-pic">
+                                <img src="@item.Resim.FirstOrDefault(x => x.Varsayilan == true).OrtaYol" alt="">
+                                @if (Request.QueryString["id"] == item.Adi)
+                                {
+                                    <div class="sale">Satış -Bu Ürün</div>
+                                }
+                                else
+                                {
+
+                                    <div class="sale">Satış</div>
+                                }
+                                <div class="icon">
+                                    <i class="icon_heart_alt"></i>
+                                </div>
+                                <ul>
+                                    <li class="w-icon active"><a name="@item.id" href="#" class="sepet"><i class="icon_bag_alt"></i>Sepete Ekle</a></li>
+                                    <li class="quick-view"><a href="/Home/UrunDetay?id=@item.Adi&kId=@item.KategoriID">+ Görüntüle</a></li>
+                                </ul>
+                            </div>
+                            <div class="pi-text">
+                                <div class="catagory-name">@item.Kategori.Adi</div>
+                                <a href="#">
+                                    <h5>@item.Adi</h5>
+                                </a>
+                                <div class="product-price">
+                                    @item.SatisFiyat ₺
+                                </div>
+                            </div>
+                        </div>
+
+
+                    </div>
+                
+
+            }
+
+
+
+        </div>
+    </div>
+</div>
+<!-- Related Products Section End -->
